@@ -10,10 +10,10 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts: English Luxury (Cormorant/Inter) & Arabic Luxury (Cairo/Amiri) -->
+    <!-- Google Fonts: English Luxury (Cormorant/Inter) & Modern Arabic Sans-Serif (Cairo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cairo:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -24,15 +24,15 @@
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
             
-            /* Dynamic Fonts based on direction */
+            /* Default English Typographic Setup */
             --font-serif: 'Cormorant Garamond', serif;
             --font-sans: 'Inter', sans-serif;
         }
 
-        /* Language Overrides for Perfect Arabic Typography */
+        /* Modernized Arabic Sans-Serif Overrides */
         html[dir="rtl"] {
-            --font-serif: 'Amiri', serif;
-            --font-sans: 'Cairo', sans-serif;
+            --font-serif: 'Cairo', sans-serif; /* Headings switched to Bold Sans */
+            --font-sans: 'Cairo', sans-serif;  /* Body text switched to Regular Sans */
         }
 
         body {
@@ -48,19 +48,26 @@
             letter-spacing: 1px;
         }
         
-        html[dir="rtl"] .brand-font {
+        html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3 {
+            font-weight: 700;
             letter-spacing: 0px;
         }
 
         .text-gold { color: var(--accent-gold); }
 
-        /* --- Dynamic Scroll Animation Engine Classes --- */
+        /* Scroll Animations Grid Reveal Engine */
         .reveal-on-scroll {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
                         transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: transform, opacity;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
         .reveal-on-scroll.revealed {
             opacity: 1;
@@ -70,17 +77,18 @@
         .delay-2 { transition-delay: 0.3s; }
         .delay-3 { transition-delay: 0.45s; }
 
-        /* Navbar Styling */
+        /* Navbar Layout styling */
         .navbar {
             background-color: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
             z-index: 1050;
         }
         .navbar.scrolled {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
             background-color: rgba(5, 5, 5, 0.95);
             border-bottom: 1px solid var(--accent-gold);
         }
@@ -94,7 +102,6 @@
         html[dir="ltr"] .nav-link { letter-spacing: 2px; }
         .nav-link:hover, .nav-link.active { color: var(--accent-gold) !important; }
 
-        /* Lang Toggle Button */
         .btn-lang-toggle {
             background: transparent;
             border: 1px solid var(--accent-gold);
@@ -109,23 +116,35 @@
             color: var(--bg-primary);
         }
 
-        /* Hero Section */
+        /* Mobile Offcanvas Navigation Menu Override */
+        .mobile-nav-canvas {
+            background-color: var(--bg-primary) !important;
+            border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+        html[dir="rtl"] .mobile-nav-canvas {
+            border-left: none !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+
+        /* Hero Container Area with Responsive Height Adjustments */
         .hero-section {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(10,10,10,1)), 
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(10,10,10,1)), 
                         url('https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             display: flex;
             align-items: center;
             position: relative;
+            padding-top: 100px;
+            padding-bottom: 50px;
         }
         .hero-title {
-            font-size: 4.5rem;
+            font-size: calc(2.2rem + 2vw);
             font-weight: 600;
             line-height: 1.1;
         }
-        html[dir="rtl"] .hero-title { font-size: 3.8rem; line-height: 1.3;}
+        html[dir="rtl"] .hero-title { line-height: 1.3; font-weight: 700; }
 
-        /* Custom Modern Luxury Buttons */
+        /* Clean Luxury Interactive Action Elements */
         .btn-monaco {
             background: transparent;
             color: var(--text-main);
@@ -137,6 +156,9 @@
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
             z-index: 1;
+        }
+        @media (max-width: 576px) {
+            .btn-monaco { width: 100%; text-center: center; }
         }
         html[dir="ltr"] .btn-monaco { letter-spacing: 2px; }
         .btn-monaco::before {
@@ -150,7 +172,7 @@
         .btn-monaco-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
         .btn-monaco-gold::before { background-color: var(--accent-gold); }
 
-        /* Product Catalog Cards */
+        /* Catalog Product Showcase Card Layouts */
         .product-card {
             background-color: var(--bg-secondary);
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -172,26 +194,34 @@
         }
         .product-card:hover .product-img { transform: scale(1.06); }
         
+        /* Mobile Touch-Friendly Product Action Overlay Adjustment */
         .product-action-overlay {
             position: absolute; bottom: -50px; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(10,10,10,0.9));
+            background: linear-gradient(transparent, rgba(10,10,10,0.95));
             padding: 1.5rem 1rem; transition: all 0.3s ease; opacity: 0;
             display: flex; justify-content: center;
         }
         .product-card:hover .product-action-overlay { bottom: 0; opacity: 1; }
+        
+        @media (max-width: 991px) {
+            .product-action-overlay {
+                position: relative; bottom: 0; opacity: 1; background: transparent; padding: 0 1rem 1.5rem 1rem;
+            }
+        }
 
-        /* Interactive Filters */
+        /* Categorized Display Badges */
         .filter-badge {
             background: transparent; color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1.5rem; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: all 0.3s ease;
+            padding: 0.5rem 1.25rem; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; transition: all 0.3s ease;
+            white-space: nowrap;
         }
         .filter-badge.active, .filter-badge:hover {
             border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(197, 168, 128, 0.05);
         }
 
-        /* Interactive Lookbook Pulse Dots */
+        /* Lookbook UI Hotspot Radar Indicators */
         .lookbook-hotspot {
-            position: absolute; width: 16px; height: 16px; background-color: var(--accent-gold);
+            position: absolute; width: 18px; height: 18px; background-color: var(--accent-gold);
             border-radius: 50%; cursor: pointer; box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.7);
             animation: pulse 2s infinite; transition: transform 0.3s ease;
         }
@@ -208,7 +238,7 @@
 </head>
 <body>
 
-    <!-- Shopping Cart Sidebar Layout -->
+    <!-- Shopping Drawer Component Layout -->
     <div class="offcanvas offcanvas-end bg-dark text-light" tabindex="-1" id="cartCanvas" style="border-left: 1px solid var(--accent-gold);">
         <div class="offcanvas-header border-bottom border-secondary">
             <h5 class="offcanvas-title brand-font text-gold fs-3" data-key="cart_title">Atelier Cart</h5>
@@ -228,99 +258,104 @@
         </div>
     </div>
 
-    <!-- Main Global Navigation Header -->
+    <!-- Application Top Global Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <!-- Navigation Links Wrapper -->
+            <!-- Left Navigation Block (Desktop only) -->
             <div class="collapse navbar-collapse d-none d-lg-flex col-lg-4">
-                <ul class="navbar-nav menu-directional-adjust">
+                <ul class="navbar-nav menu-directional-adjust me-auto">
                     <li class="nav-item"><a class="nav-link active" href="#hero" data-key="nav_home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#collection" data-key="nav_collection">Collections</a></li>
                     <li class="nav-item"><a class="nav-link" href="#experience" data-key="nav_atelier">Atelier</a></li>
                 </ul>
             </div>
 
-            <!-- Custom Geometric SVG Brand Logo -->
-            <a class="navbar-brand d-flex flex-column align-items-center justify-content-center mx-auto col-6 col-lg-4 text-center" href="#hero">
-                <svg width="42" height="35" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 45L30 5L50 45" stroke="#c5a880" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Centralized Brand Identity Area -->
+            <a class="navbar-brand d-flex flex-row flex-lg-column align-items-center justify-content-center mx-auto col-auto col-lg-4 text-center py-1" href="#hero">
+                <svg width="32" height="28" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg" class="d-inline-block align-text-top me-2 ms-2">
+                    <path d="M10 45L30 5L50 45" stroke="#c5a880" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M22 45L30 20L38 45" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <line x1="15" y1="38" x2="45" y2="38" stroke="#c5a880" stroke-width="1"/>
                 </svg>
-                <span class="brand-font fs-3 text-white fw-bold mt-1" style="letter-spacing: 5px;">MONACO</span>
+                <span class="brand-font fs-4 text-white fw-bold align-middle" style="letter-spacing: 3px;">MONACO</span>
             </a>
 
-            <!-- Utilities (Language switch, Shopping bag) -->
-            <div class="d-flex align-items-center justify-content-end col-6 col-lg-4 gap-2">
-                <!-- Interactive Language Switcher -->
-                <button class="btn btn-lang-toggle mx-2" onclick="toggleLanguage()" id="langBtn">العربية</button>
+            <!-- Right-aligned Global Utility Operations Hub -->
+            <div class="d-flex align-items-center justify-content-end col-auto col-lg-4 gap-1 gap-md-2">
+                <button class="btn btn-lang-toggle" onclick="toggleLanguage()" id="langBtn">العربية</button>
                 
                 <button class="btn text-white p-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger d-none" style="font-size: 0.65rem;">0</span>
                 </button>
-                <button class="navbar-toggler ms-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+                
+                <button class="navbar-toggler p-2 border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuCanvas">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
         </div>
-        <!-- Mobile Dropdown Setup -->
-        <div class="collapse navbar-collapse bg-black p-3 d-lg-none" id="mobileMenu">
-            <ul class="navbar-nav text-center">
-                <li class="my-2"><a class="nav-link" href="#hero" data-key="nav_home">Home</a></li>
-                <li class="my-2"><a class="nav-link" href="#collection" data-key="nav_collection">Collections</a></li>
-                <li class="my-2"><a class="nav-link" href="#experience" data-key="nav_atelier">Atelier</a></li>
-            </ul>
-        </div>
     </nav>
 
-    <!-- Main Hero Landing Display -->
+    <!-- Offcanvas Container Structural Layout for Responsive Mobile Drawer View -->
+    <div class="offcanvas offcanvas-start mobile-nav-canvas text-light d-lg-none" tabindex="-1" id="mobileMenuCanvas">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <span class="brand-font fs-4 text-gold fw-bold" style="letter-spacing: 2px;">MONACO</span>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav gap-3 text-start-adjust">
+                <li class="nav-item" data-bs-dismiss="offcanvas"><a class="nav-link fs-5" href="#hero" data-key="nav_home">Home</a></li>
+                <li class="nav-item" data-bs-dismiss="offcanvas"><a class="nav-link fs-5" href="#collection" data-key="nav_collection">Collections</a></li>
+                <li class="nav-item" data-bs-dismiss="offcanvas"><a class="nav-link fs-5" href="#experience" data-key="nav_atelier">Atelier</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Editorial Canvas Hero Section -->
     <section id="hero" class="hero-section">
         <div class="container">
             <div class="row">
                 <div class="col-xl-7 col-lg-9 text-start-adjust">
-                    <span class="text-gold tracking-widest text-uppercase d-block mb-3 fs-6 reveal-on-scroll" data-key="hero_subtitle">Sartorial Excellence</span>
-                    <h1 class="hero-title text-white mb-4 reveal-on-scroll delay-1" data-key="hero_title">Redefining the Modern Gentleman</h1>
-                    <p class="lead text-muted fw-light mb-5 col-md-10 reveal-on-scroll delay-2" style="font-size: 1.1rem; line-height: 1.8;" data-key="hero_desc">
+                    <span class="text-gold tracking-widest text-uppercase d-block mb-2 fs-6 reveal-on-scroll" data-key="hero_subtitle">Sartorial Excellence</span>
+                    <h1 class="hero-title text-white mb-3 reveal-on-scroll delay-1" data-key="hero_title">Redefining the Modern Gentleman</h1>
+                    <p class="lead text-muted fw-light mb-4 col-md-10 reveal-on-scroll delay-2" style="font-size: 1.05rem; line-height: 1.7;" data-key="hero_desc">
                         Impeccable structural integrity meets Riviera leisure. Discover custom cuts tailored for luxury performance.
                     </p>
-                    <div class="d-flex flex-wrap gap-3 reveal-on-scroll delay-3">
-                        <a href="#collection" class="btn btn-monaco btn-monaco-gold" data-key="hero_btn_primary">Explore Archive</a>
-                        <a href="#experience" class="btn btn-monaco" data-key="hero_btn_secondary">The Atelier Journey</a>
+                    <div class="d-flex flex-column flex-sm-row gap-3 reveal-on-scroll delay-3">
+                        <a href="#collection" class="btn btn-monaco btn-monaco-gold text-center" data-key="hero_btn_primary">Explore Archive</a>
+                        <a href="#experience" class="btn btn-monaco text-center" data-key="hero_btn_secondary">The Atelier Journey</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Catalogue Management Layout Component -->
+    <!-- Catalog Collection Grid Section -->
     <section id="collection" class="py-5" style="background-color: var(--bg-primary);">
-        <div class="container py-5">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 reveal-on-scroll">
-                <div class="text-start-adjust">
-                    <span class="text-gold tracking-widest text-uppercase d-block mb-2" style="font-size: 0.8rem;" data-key="catalog_subtitle">Seasonal Drops</span>
+        <div class="container py-4 py-md-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end mb-4 mb-md-5 reveal-on-scroll">
+                <div class="text-start-adjust mb-3 mb-md-0">
+                    <span class="text-gold tracking-widest text-uppercase d-block mb-1" style="font-size: 0.8rem;" data-key="catalog_subtitle">Seasonal Drops</span>
                     <h2 class="fs-1 m-0" data-key="catalog_title">The Core Collection</h2>
                 </div>
-                <!-- Dynamic Content Category Filters -->
-                <div class="d-flex flex-wrap gap-2 mt-4 mt-md-0" id="filterContainer">
-                    <!-- Loaded dynamically via the modular config engine script -->
+                <div class="d-flex flex-row gap-2 w-100 w-md-auto overflow-x-auto pb-2 pb-md-0 scrollbar-hidden" id="filterContainer">
+                    <!-- Loaded dynamically via JavaScript configuration matrices -->
                 </div>
             </div>
 
-            <!-- Dynamic Target Cards Container -->
-            <div class="row g-4" id="catalogGrid">
-                <!-- Injected via JavaScript Config for seamless scalability -->
+            <div class="row g-3 g-md-4" id="catalogGrid">
+                <!-- Dynamically constructed product node items go here -->
             </div>
         </div>
     </section>
 
     <!-- Visual Interactive Editorial Lookbook Display Frame -->
     <section id="experience" class="py-5" style="background-color: var(--bg-secondary);">
-        <div class="container py-5">
-            <div class="row align-items-center g-5">
+        <div class="container py-4 py-md-5">
+            <div class="row align-items-center g-4 g-lg-5">
                 <div class="col-lg-6 position-relative reveal-on-scroll">
                     <div class="overflow-hidden shadow-lg border border-secondary position-relative">
-                        <img src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?auto=format&fit=crop&w=800&q=80" class="w-100 d-block object-fit-cover" alt="Atelier Lookbook" style="max-height: 650px;">
+                        <img src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?auto=format&fit=crop&w=800&q=80" class="w-100 d-block object-fit-cover" alt="Atelier Lookbook" style="max-height: 550px;">
                         
                         <!-- Pulse Point Hotspot 1 -->
                         <div class="lookbook-hotspot" style="top: 25%; left: 52%;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Cashmere Scarf</b><br>$240"></div>
@@ -330,21 +365,21 @@
                 </div>
                 <div class="col-lg-6 ps-lg-5 text-start-adjust reveal-on-scroll delay-1">
                     <span class="text-gold tracking-widest text-uppercase d-block mb-2" style="font-size: 0.8rem;" data-key="atelier_subtitle">The Atelier</span>
-                    <h2 class="fs-1 mb-4" data-key="atelier_title">Precision Engineering, Sartorial Grace.</h2>
-                    <p class="text-muted mb-4" style="line-height: 1.8;" data-key="atelier_desc_1">
+                    <h2 class="fs-1 mb-3 mb-md-4" data-key="atelier_title">Precision Engineering, Sartorial Grace.</h2>
+                    <p class="text-muted mb-4" style="line-height: 1.7; font-size: 0.95rem;" data-key="atelier_desc_1">
                         At Monaco, we construct silhouettes that demand respect without uttering a single word. Every seam is checked, every material sustainably sourced from historical mills across Biella, Italy.
                     </p>
                     <blockquote class="border-start border-warning border-3 ps-4 my-4 italic text-muted font-serif fs-5 text-start-adjust" data-key="atelier_quote">
                         "Luxury isn't loud. It's the silent certainty of flawless architectural alignment."
                     </blockquote>
-                    <div class="row pt-3 text-center text-sm-start text-start-adjust">
+                    <div class="row pt-2 text-start-adjust">
                         <div class="col-sm-6 mb-3">
                             <h4 class="text-white fs-5 mb-1"><i class="fa-solid fa-scissors text-gold me-2 ms-2"></i> <span data-key="feature_1_title">Custom Drape</span></h4>
-                            <p class="small text-muted" data-key="feature_1_desc">Canvas construction optimized for dynamic masculine movement.</p>
+                            <p class="small text-muted mb-0" data-key="feature_1_desc">Canvas construction optimized for dynamic masculine movement.</p>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <h4 class="text-white fs-5 mb-1"><i class="fa-solid fa-bolt text-gold me-2 ms-2"></i> <span data-key="feature_2_title">Digital Fitting</span></h4>
-                            <p class="small text-muted" data-key="feature_2_desc">Advanced internal measurement tools ensuring impeccable fits online.</p>
+                            <p class="small text-muted mb-0" data-key="feature_2_desc">Advanced internal measurement tools ensuring impeccable fits online.</p>
                         </div>
                     </div>
                 </div>
@@ -352,17 +387,17 @@
         </div>
     </section>
 
-    <!-- Global Base Branding Footer -->
+    <!-- Global Layout Base Footer -->
     <footer class="py-5 bg-black border-top border-secondary">
-        <div class="container py-4">
+        <div class="container py-2 py-md-4">
             <div class="row g-4 text-start-adjust">
                 <div class="col-md-4">
-                    <span class="brand-font fs-3 text-white fw-bold d-block mb-3">MONACO</span>
-                    <p class="text-muted small pe-md-4" style="line-height: 1.7;" data-key="footer_brand_desc">High-end curated tailoring designed for modern global citizens. Operational globally with flagship fitting salons across Mediterranean vectors.</p>
+                    <span class="brand-font fs-3 text-white fw-bold d-block mb-2">MONACO</span>
+                    <p class="text-muted small pe-md-4 mb-0" style="line-height: 1.6;" data-key="footer_brand_desc">High-end curated tailoring designed for modern global citizens. Operational globally with flagship fitting salons across Mediterranean vectors.</p>
                 </div>
                 <div class="col-6 col-md-2 offset-md-2">
                     <h5 class="text-white font-serif fs-5 mb-3" data-key="footer_nav_title">Navigation</h5>
-                    <ul class="list-unstyled p-0">
+                    <ul class="list-unstyled p-0 m-0">
                         <li class="mb-2"><a href="#hero" class="footer-link" data-key="nav_home">Home</a></li>
                         <li class="mb-2"><a href="#collection" class="footer-link" data-key="nav_collection">The Collection</a></li>
                         <li class="mb-2"><a href="#experience" class="footer-link" data-key="nav_atelier">Bespoke Atelier</a></li>
@@ -370,7 +405,7 @@
                 </div>
                 <div class="col-6 col-md-2">
                     <h5 class="text-white font-serif fs-5 mb-3" data-key="footer_services_title">Services</h5>
-                    <ul class="list-unstyled p-0">
+                    <ul class="list-unstyled p-0 m-0">
                         <li class="mb-2"><a href="#" class="footer-link" data-key="footer_srv_1">Private Fitting</a></li>
                         <li class="mb-2"><a href="#" class="footer-link" data-key="footer_srv_2">Care Guide</a></li>
                         <li class="mb-2"><a href="#" class="footer-link" data-key="footer_srv_3">Secure Shipping</a></li>
@@ -384,8 +419,8 @@
                     </div>
                 </div>
             </div>
-            <hr class="border-secondary my-5">
-            <div class="d-flex flex-column flex-sm-row justify-content-between text-muted small text-start-adjust">
+            <hr class="border-secondary my-4 my-md-5">
+            <div class="d-flex flex-column flex-sm-row justify-content-between text-muted small text-start-adjust gap-2">
                 <p class="mb-0" data-key="footer_copyright">&copy; 2026 MONACO Atelier. Architectural Elegance Preserved.</p>
             </div>
         </div>
@@ -394,17 +429,11 @@
     <!-- Bootstrap 5 Bundle with Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- --- ADJUUSTABLE CONFIGURATION MATRIX SECTION --- -->
+    <!-- Adjustable Core Localization and Structural Data Models Matrix -->
     <script>
-        /**
-         * FUTURE ADJUSTABLE CORE ENGINE CONFIGURATION (CMS)
-         * To modify content, translations, products, or metadata safely down the road, 
-         * just alter the respective properties or values directly in this object wrapper.
-         */
         const MONACO_CONFIG = {
             currentLanguage: 'en',
             
-            // Centralized Product Catalog Content Database Array
             products: [
                 {
                     id: 1,
@@ -440,7 +469,6 @@
                 }
             ],
 
-            // Content Localization Layout Dictionaries 
             localization: {
                 en: {
                     nav_home: "Home", nav_collection: "Collections", nav_atelier: "Atelier",
@@ -487,29 +515,26 @@
             }
         };
 
-        // Global Application Cart Array State Tracker
         let currentCart = [];
 
-        // --- INTERSECTION OBSERVER ANIMATION CONTROLLER ---
+        // Viewport Intersection Observer Engine for Scroll Animations
         function initScrollAnimations() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            
             const animationObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
                     }
                 });
-            }, {
-                root: null,
-                threshold: 0.08, // Animates early as element enters screen edge
-                rootMargin: "0px 0px -40px 0px"
-            });
+            }, { root: null, threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
 
             document.querySelectorAll('.reveal-on-scroll').forEach(element => {
                 animationObserver.observe(element);
             });
         }
 
-        // Render Product Catalog Dynamic Components via JS Data Layer Setup
+        // Render Catalog Product Cards Loop 
         function renderCatalogItems() {
             const grid = document.getElementById('catalogGrid');
             const lang = MONACO_CONFIG.currentLanguage;
@@ -517,19 +542,21 @@
 
             MONACO_CONFIG.products.forEach(product => {
                 const itemHtml = `
-                    <div class="col-sm-6 col-lg-3 catalog-item reveal-on-scroll" data-category="${product.category}">
-                        <div class="product-card h-100">
+                    <div class="col-6 col-lg-3 catalog-item reveal-on-scroll" data-category="${product.category}">
+                        <div class="product-card h-100 d-flex flex-column justify-content-between">
                             <div class="product-img-wrapper">
                                 <img src="${product.img}" class="product-img" alt="${product[lang].name}">
                             </div>
-                            <div class="p-4 bg-secondary">
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <h3 class="fs-5 m-0 text-white">${product[lang].name}</h3>
-                                    <span class="text-gold font-serif">$${product.price.toLocaleString()}</span>
+                            <div class="p-3 p-md-4 bg-secondary flex-grow-1 d-flex flex-column justify-content-between">
+                                <div class="mb-2">
+                                    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-start align-items-xl-center gap-1 mb-1">
+                                        <h3 class="fs-6 m-0 text-white fw-semibold">${product[lang].name}</h3>
+                                        <span class="text-gold font-serif small">$${product.price.toLocaleString()}</span>
+                                    </div>
+                                    <p class="text-muted small mb-0" style="font-size:0.75rem;">${product[lang].desc}</p>
                                 </div>
-                                <p class="text-muted small mb-0">${product[lang].desc}</p>
                                 <div class="product-action-overlay">
-                                    <button class="btn btn-monaco btn-sm w-100 btn-monaco-gold" onclick="addToCart('${product.id}')">
+                                    <button class="btn btn-monaco btn-sm w-100 btn-monaco-gold py-2" style="font-size:0.75rem;" onclick="addToCart('${product.id}')">
                                         ${MONACO_CONFIG.localization[lang].add_to_order_btn}
                                     </button>
                                 </div>
@@ -540,7 +567,7 @@
             });
 
             renderFilterBadges();
-            initScrollAnimations(); // Reinitialize observers for newly built items
+            initScrollAnimations();
         }
 
         function renderFilterBadges() {
@@ -556,7 +583,6 @@
             `;
         }
 
-        // Dynamic Filtering Utility Control Handler
         function filterCatalog(category, badgeElement) {
             document.querySelectorAll('.filter-badge').forEach(badge => badge.classList.remove('active'));
             badgeElement.classList.add('active');
@@ -573,7 +599,7 @@
             });
         }
 
-        // --- LINGUISTIC DIRECTION DOM TRANSLATION OVERLAY ENGINE ---
+        // Layout Inversion Engine (LTR / RTL Setup)
         function toggleLanguage() {
             const current = MONACO_CONFIG.currentLanguage;
             const target = current === 'en' ? 'ar' : 'en';
@@ -582,12 +608,10 @@
             const htmlTag = document.documentElement;
             const langBtn = document.getElementById('langBtn');
 
-            // Apply Document Level Attributes & Font Family States
             htmlTag.setAttribute('lang', target);
             htmlTag.setAttribute('dir', target === 'ar' ? 'rtl' : 'ltr');
             langBtn.innerText = target === 'ar' ? 'English' : 'العربية';
 
-            // Custom Directional Realignment Dynamic Classes Injector mapping helper
             const textAdjusts = document.querySelectorAll('.text-start-adjust');
             const menus = document.querySelectorAll('.menu-directional-adjust');
 
@@ -601,12 +625,10 @@
                 document.getElementById('footerEmailInput').placeholder = MONACO_CONFIG.localization.en.footer_email_placeholder;
             }
 
-            // Loop and bind data keys dynamically from Config Dictionary Array
             const dict = MONACO_CONFIG.localization[target];
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
                 if (dict[key]) {
-                    // Check if targeted structural element contains children icons to protect layout
                     const innerIcon = element.querySelector('i');
                     if (innerIcon) {
                         const spanElement = element.querySelector('span');
@@ -621,7 +643,7 @@
             updateCartUI();
         }
 
-        // Dynamic Interactive Shopping Cart Functional Subroutines
+        // Interactive Modular Cart Actions
         function addToCart(productId) {
             const matchedProduct = MONACO_CONFIG.products.find(p => p.id == productId);
             if (matchedProduct) {
@@ -631,10 +653,18 @@
             }
         }
 
-        function removeFromCart(index) {
-            currentCart.splice(index, 1);
-            updateCartUI();
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCatalogItems();
+            [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(el => new bootstrap.Tooltip(el));
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 30) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        function removeFromCart(index) { currentCart.splice(index, 1); updateCartUI(); }
 
         function updateCartUI() {
             const container = document.getElementById('cartItemsContainer');
@@ -654,13 +684,12 @@
 
             let total = 0;
             let html = '<ul class="list-group list-group-flush bg-transparent text-start w-100 p-0">';
-            
             currentCart.forEach((item, index) => {
                 total += item.price;
                 html += `
                     <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center py-3 ${lang === 'ar' ? 'text-end' : 'text-start'}">
                         <div class="w-100">
-                            <h6 class="mb-0 text-white font-serif">${item[lang].name}</h6>
+                            <h6 class="mb-0 text-white">${item[lang].name}</h6>
                             <small class="text-gold">$${item.price.toLocaleString()}</small>
                         </div>
                         <button class="btn text-danger border-0 p-1" onclick="removeFromCart(${index})">
@@ -668,25 +697,10 @@
                         </button>
                     </li>`;
             });
-            
             html += '</ul>';
             container.innerHTML = html;
             totalElement.innerText = `$${total.toLocaleString()}.00`;
         }
-
-        // Bootstrap Core Event State Initializers
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('.navbar');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
-
-        // Initialize Application Context on Window Loading
-        document.addEventListener("DOMContentLoaded", () => {
-            renderCatalogItems();
-            // Initialize Bootstrap Core Tooltips
-            [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(el => new bootstrap.Tooltip(el));
-        });
     </script>
 </body>
 </html>
